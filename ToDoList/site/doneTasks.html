@@ -1,0 +1,41 @@
+﻿@{
+    Layout="layout";
+}
+@if(Model.ListOfToDo.Count != 0)
+{
+    <div class="col-9 text-center">
+        <h3 class="mt-5">Список выполненных задач</h3>
+        <table class="table-bordered w-100">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Заголовок</th>
+                <th scope="col">Имя исполнителя</th>
+                <th scope="col">Дата выполнения</th>
+                <th scope="col">Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(int i = 0; i < @Model.ListOfToDo.Count; i++)
+            {
+                @if(Model.ListOfToDo[i].Status == "done")
+                {
+                    <tr>
+                        <td>@Model.ListOfToDo[i].Id</td>
+                        <td><a href="http://localhost:8888/task.html?id=@Model.ListOfToDo[i].Id">@Model.ListOfToDo[i].Name</a></td>
+                        <td>@Model.ListOfToDo[i].Creator</td>
+                        <td>@Model.ListOfToDo[i].EndDate</td>
+                        <td>@Model.ListOfToDo[i].Status</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="col-9 text-center mt-5">
+        <h3>Список пуст добавьте задачи!</h3>
+    </div>
+}

@@ -1,0 +1,40 @@
+﻿@{
+    Layout="layout";
+}
+<h2 class="text-center py-4">Задача #@Model.TakenId</h2>
+<div>
+    <div class="row">
+        <div class="col-sm-4 border py-3">
+            @for (int i = 0; i < @Model.ListOfToDo.Count; i++)
+            {
+                @if(Model.ListOfToDo[i].Id == @Model.TakenId)
+                {
+                    <p>Исполнитель задачи: @Model.ListOfToDo[i].Creator</p>
+                    <p>Дата создания: @Model.ListOfToDo[i].CreateDate</p>
+                    <p>Дата выполнения: @Model.ListOfToDo[i].EndDate</p>
+                }
+            }
+        </div>
+        <div class="col-sm-8 text-center border py-3">
+            <div class="d-flex justify-content-around">
+                <form class="form" action="" method="post">
+                    <button type="submit" name="action" value="edit">редактировать</button>
+                    <button type="submit" name="action" value="execute">выполнить</button>
+                    <button type="submit" name="action" value="delete">удалить</button>
+                </form>
+            </div>
+            <h3 class="my-4">Описание задачи</h3>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm">
+            @for (int i = 0; i < @Model.ListOfToDo.Count; i++)
+            {
+                @if(Model.ListOfToDo[i].Id == @Model.TakenId)
+                {
+                    <p>@Model.ListOfToDo[i].Description</p>
+                }
+            }
+        </div>
+    </div>
+</div>

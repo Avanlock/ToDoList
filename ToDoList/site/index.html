@@ -1,0 +1,66 @@
+﻿@{
+    Layout="layout";
+}
+
+<div class="row my-5">
+@if(Model.ListOfToDo.Count != 0)
+{
+    <div class="col-9 text-center">
+        <h3>Список Задач</h3>
+        <table class="table-bordered w-100">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Заголовок</th>
+                <th scope="col">Имя исполнителя</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(int i = 0; i < @Model.ListOfToDo.Count; i++)
+            {
+            <tr>
+                <td>@Model.ListOfToDo[i].Id</td>
+                <td><a href="http://localhost:8888/task.html?id=@Model.ListOfToDo[i].Id">@Model.ListOfToDo[i].Name</a></td>
+                <td>@Model.ListOfToDo[i].Creator</td>
+                <td>@Model.ListOfToDo[i].CreateDate</td>
+                <td>@Model.ListOfToDo[i].Status</td>
+                <td>
+                    <form class="form" action="http://localhost:8888/index.html?id=@Model.ListOfToDo[i].Id" method="post">
+                        <div class="btn-group d-flex justify-content-around" role="group">
+                            @if(Model.ListOfToDo[i].Status != "done")
+                            {
+                                <button type="submit" name="action" value="execute">выполнить</button>
+                            }
+                            <button type="submit" name="action" value="delete">удалить</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+
+else 
+{
+    <div class="col-9 text-center">
+        <h3>Список пуст добавьте задачи!</h3>
+    </div>
+}
+    <div class="col-3">
+        <h3>Добавить новую</h3>
+        <form class="form" action="http://localhost:8888/index.html" method="post">
+            <label for="name">Заголовок</label>
+            <input id="name" required class="form-control" type="text" name="name" placeholder="Введите зоголовок задачи">
+            <label for="creator" class="my-2">Имя пользователя</label>
+            <input id="creator" required class="form-control" type="text" name="creator" placeholder="Введите имя пользователя">
+            <label for="text" class="my-2">Описание задачи</label>
+            <textarea id="text" required class="form-control" name="description" rows="4"></textarea>
+            <button type="submit" class="btn btn-primary my-2" value="Submit">Добавить</button>
+        </form>
+    </div>
+</div>
